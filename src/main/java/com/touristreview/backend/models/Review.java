@@ -1,11 +1,18 @@
 package com.touristreview.backend.models;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Document(collection = "reviews")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,21 +21,19 @@ import java.time.LocalDateTime;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String comment;
+
     private int rating;
 
     private LocalDateTime createdAt;
 
-    // Many reviews belong to one attraction
-    @ManyToOne
-    @JoinColumn(name = "attraction_id")
+    // Reference to Attraction
+    @DBRef
     private Attraction attraction;
 
-    // Many reviews belong to one user
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    // Reference to User
+    @DBRef
     private User user;
 }

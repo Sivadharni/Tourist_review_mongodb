@@ -1,11 +1,17 @@
 package com.touristreview.backend.models;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Entity
+@Document(collection = "attractions")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,18 +20,15 @@ import java.util.List;
 public class Attraction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String name;
+
     private String location;
 
-    @Column(length = 1000)
     private String description;
 
     private String imageUrl;
 
-    // One Attraction has many reviews
-    @OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 }

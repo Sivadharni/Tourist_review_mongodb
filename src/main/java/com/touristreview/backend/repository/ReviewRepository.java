@@ -1,11 +1,13 @@
 package com.touristreview.backend.repository;
 
-import com.touristreview.backend.models.Review;
 import com.touristreview.backend.models.Attraction;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.touristreview.backend.models.Review;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface ReviewRepository extends JpaRepository<Review, Long> {
+public interface ReviewRepository extends MongoRepository<Review, String> {
+
     List<Review> findByAttraction(Attraction attraction);
+
 }

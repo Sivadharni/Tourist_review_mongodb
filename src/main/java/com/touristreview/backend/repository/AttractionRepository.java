@@ -1,8 +1,8 @@
 package com.touristreview.backend.repository;
 
 import com.touristreview.backend.models.Attraction;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface AttractionRepository extends JpaRepository<Attraction, Long> {
-    // Can add custom queries if needed later
+public interface AttractionRepository extends MongoRepository<Attraction, String> {
+
 }
